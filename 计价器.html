@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			input{
+				width: 30px;
+				height: 20px;
+				text-align: center;
+				line-height: 20px;
+			}
+			div{
+				margin-bottom: 10px;
+			}
+			mark{
+				background: transparent;
+			}
+			em{
+				font-style: normal;
+				font-weight: blod;
+				font-size: 20px;
+				color: blue;
+			}
+			.priceAll{
+				font-style: initial;
+				font-weight: bold;
+				color: red;
+			}
+		</style>
+		<script type="text/javascript">
+		function $(id) {
+			return document.getElementById(id);
+		}
+		function tags(tagNames,con) {
+			con = con||document;
+			return con.getElementsByTagName(tagNames);
+		}
+		function classNames(className,context) {
+			context = context||document;
+			return context.getElementsByClassName(className)
+		}
+			window.onload = function(){
+				var boxs = tags('div');
+				var prves = classNames('prve');
+				var nexts = classNames('next');
+				
+				var priceAlls = classNames('priceAll');
+				var prices = classNames('price');
+				var marks = tags('mark')[0];
+				var all = tags('em')[0];
+				var allPrices = [];//定义一个数组用来存储最高价格
+				var btns = classNames('number');
+				
+				for (var i = 0; i < boxs.length; i++) {//用来给添加点击加减行为
+					fn_1(i);
+				}
+				function fn_1(i){
+					var num = classNames('number',boxs[i])[0];
+					var nums = 0;
+					prves[i].onclick = function(){
+						nums--
+						if(nums<0){
+							nums = 0;
+						}
+						num.value = nums;//把运算后的nums家给num；
+						priceAlls[i].innerHTML = (prices[i].innerHTML)*nums;
+						//把运算后的价格传给inn二Html；
+						fn2()//调用fn2（）；
+					};
+					
+					nexts[i].onclick = function(){
+						nums++
+						num.value = nums;
+						priceAlls[i].innerHTML = (prices[i].innerHTML)*nums;
+						fn2()
+					};
+				}
+				function fn2() {
+					var abc = 0;//定义一个变量用来存储每个的总价
+					for (var j = 0; j < boxs.length; j++) {
+						abc += parseFloat(priceAlls[j].innerHTML);
+						//把获取到的价格转化为数字传递给abc
+						if(btns[j].value>0){
+							//判断当value不为零时才添加到对应的数组里
+							allPrices[j] = parseFloat(prices[j].innerHTML);
+						}else{//为零时清空最高价格
+							allPrices[j] = 0;
+						}
+						imax = -Infinity;//此值用来比较最高价格 初始为第一个
+						for (var s = 0; s <allPrices.length; s++) {
+							if(imax<allPrices[s]){//当此值大于imax时，imax等于他
+								imax = allPrices[s];
+							}
+						}
+					}
+					marks.innerHTML = imax;
+					all.innerHTML = abc;
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<div>
+			<input type="button" class="prve" value="-" />
+			<input type="text" class="number" value="0" />
+			<input type="button" class="next" value="+" />
+			单价 <strong class="price">1</strong>元  总计   <span class="priceAll">0</span> 元；
+		</div>
+		<div>
+			<input type="button" class="prve" value="-" />
+			<input type="text" class="number" value="0" />
+			<input type="button" class="next" value="+" />
+			单价 <strong class="price">2</strong>元  总计  <span class="priceAll">0</span> 元；
+		</div>
+		<div>
+			<input type="button" class="prve" value="-" />
+			<input type="text" class="number" value="0" />
+			<input type="button" class="next" value="+" />
+			单价 <strong class="price">3</strong>元  总计  <span class="priceAll">0</span> 元；
+		</div>
+		<div>
+			<input type="button" class="prve" value="-" />
+			<input type="text" class="number" value="0" />
+			<input type="button" class="next" value="+" />
+			单价 <strong class="price">4</strong>元  总计  <span class="priceAll">0</span> 元；
+		</div>
+		<p>
+			当前最高价格  <mark>0</mark>  元；总计  <em>0</em>  元；
+		</p>
+	</body>
+</html>

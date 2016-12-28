@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#text{
+				height: 20px;
+			}
+			
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+			  	judge.onclick = function(){
+			  		var v = text.value;//此变量用来存储text的value值
+			  	  	if(v == 0){//当v的值为0时
+			  	  		alert('号码不能为空')
+			  	  	}else if(isNaN(v)){//当满足以上再看v是不是nan
+			  	  		alert('号码只能为数字')
+			  	  		text.value='';
+			  	  	}else if(v[0]==0){//当满足以上条件时在看首字母是不是0
+			  	  		alert('号码首位不能为0')
+			  	  		text.value='';
+			  	  	}else if(parseInt(v)+""!== v){
+			  	  		//在判断把v转成字符串后和原来得值是否相等
+			  	  		alert('号码不能为小数')
+			  	  		text.value='';
+			  	  	}else if(!(v.length>=5&&v.length<=10)){
+			  	  		//最后再判断v的length值是否在10和5之间
+			  	  		alert('输入的号码字必须在5位以上、10位以内');
+			  	  		text.value='';
+			  	  	}
+			  	};  
+			};
+		</script>
+	</head>
+	<body>
+		<p>请输入QQ号码：
+			<input type="text" id="text" value="" />
+			<input type="button" id="judge" value="判断" />
+		</p>
+	</body>
+</html>
