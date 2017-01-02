@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+		header{
+			margin: 20px auto;
+			text-align: center;
+		}
+		input{
+			width: 100px;
+			height: 44px;
+			text-align: center;
+			line-height: 44px;
+			font-size: 18px;
+		}
+			div{
+				float: left;
+				width: 200px;
+				height: 150px;
+				margin-left: 10px;
+				text-align: center;	
+			}
+			p{
+				margin: 0;
+				width: 200px;
+				height: 120px;
+				text-align: center;
+				line-height: 120px;
+				font-size: 60px;	
+				background: red;
+			}
+			span{
+				font-size: 24px;
+			}
+			
+		</style>
+		<script src="js/tools.js"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				var allP = $('p');
+				var spans = $('span');
+				var sorts = $('#sort');
+				var randoms = $('#random');
+				var arr = [
+				{
+					con :'eff5',
+					title:'5-eff5'
+				},
+				{
+					con :'bbb2',
+					title:'2-bbb2'
+				},
+				{
+					con:'ccc3',
+					title: '3-ccc3'
+				},
+				{
+					con :'aaa1',
+					title: '1-aaa1'
+				},
+				{
+					con: 'ddd4',
+					title: '4-ddd4'
+				},
+				{
+					con:'rtgv7',
+					title:'7-rtgv7'
+				},
+				{
+					con:'glfjr6',
+					title: '6-glfjr6'
+				}];
+				
+				function arrI() {
+					for (var i = 0; i < allP.length; i++) {
+				  		allP[i].innerHTML = arr[i].con;
+				  		spans[i].innerHTML = arr[i].title;
+				  	}
+				};
+			  	arrI()
+			  	randoms.onclick = function(){
+			  	  	arr.sort(function (){
+						return  0.5 - Math.random()//取出随机的正负值
+					});
+					arrI()
+			  	};
+			  	sorts.onclick = function(){
+			  	  	if(sorts.value =='从小到大'){
+			  	  		arr.sort(function(a,b){
+			  	  		  	return a.con.charCodeAt()-b.con.charCodeAt();
+			  	  		  	//比较这一个与下一个的大小，结果大于零倒换位置
+			  	  		});
+			  	  		sorts.value = '从大到小';
+			  	  	}else{
+			  	  		sorts.value = '从小到大';
+			  	  		arr.sort(function(a,b){
+			  	  		  	return b.con.charCodeAt()-a.con.charCodeAt();
+			  	  		});
+			  	  	}
+			  	  	arrI()
+			  	};
+			};
+		</script>
+	</head>
+	<body>
+		<header>
+			<input type="button" id="sort" value="从小到大" />
+			<input type="button" id="random" value="打乱顺序" />
+		</header>
+		<div>
+			<p></p>
+			<span></span>
+		</div>
+		<div>
+			<p></p>
+			<span></span>
+		</div>
+		<div>
+			<p></p>
+			<span></span>
+		</div>
+		<div>
+			<p></p>
+			<span></span>
+		</div>
+		<div>
+			<p></p>
+			<span></span>
+		</div>
+		<div>
+			<p></p>
+			<span></span>
+		</div>
+		<div>
+			<p></p>
+			<span></span>
+		</div>
+		
+	</body>
+</html>
